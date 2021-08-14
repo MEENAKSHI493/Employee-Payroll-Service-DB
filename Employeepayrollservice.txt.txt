@@ -1,0 +1,63 @@
+-----------------------------------------------------------------------------------------
+                            welcome to MYSQL.
+------------------------------------------------------------------------------------------
+        #UC1
+------------------------------------------------------------------------------------------
+1.  create database payroll_service;                          #create a database
+
+2.  show databases;                                                #show the database
+
+3.  use payroll_service;                                      #To use payroll_service database
+
+4.  select database();                                            # show current database
+------------------------------------------------------------------------------------------
+        #UC2
+-------------------------------------------------------------------------------------------
+1.  create table employee_payroll                             #create a table    
+    -> (                                                   
+    -> id       INT unsigned NOT NULL AUTO_INCREMENT,            #Employee salary  
+    -> name       VARCHAR(150) NOT NULL,                       #Employee salary  
+    -> salary      Double  NOT NULL,                            #Employee  start date
+    -> start      DATE NOT NULL,                                #make id primary key
+    -> PRIMARY KEY (id)
+    -> ); 
+2.  DESCRIBE employee_payroll;                                  #Describe table
+--------------------------------------------------------------------------------------------
+      #UC3
+----------------------------------------------------------------------------------------------
+1.    INSERT INTO employee_payroll(name,salary,start) VALUES          #Inserting a data into employee_payroll
+    -> ('Bill',1000000.00, '2018-06-04'),
+    -> ('Terisa',  2000000.00,   '2019-11-13'),
+    -> ('Charlie',  4000000.00,   '2020-07-13');    
+-------------------------------------------------------------------------------------------------
+      #UC4
+-------------------------------------------------------------------------------------------
+1.   select * from employee_payroll;                                   # retriving records from table
+2.  select salary from employee_payroll WHERE name = 'Bill';             # retriving salary from table
+---------------------------------------------------------------------------------------------
+     #UC5
+-----------------------------------------------------------------------------------------------
+1.  select * from employee_payroll
+    WHERE start BETWEEN CAST('2018-01-01' AS DATE) AND DATE(NOW());        # selecte employee according to date range
+2.  select * from employee_payroll
+    WHERE start BETWEEN CAST('2018-04-03' AS DATE) AND DATE(NOW());
+3.   select * from employee_payroll
+    WHERE start BETWEEN CAST('2019-01-01' AS DATE) AND DATE(NOW());
+--------------------------------------------------------------------------------------------------
+    #UC6
+---------------------------------------------------------------------------------------------------
+1.   ALTER TABLE employee_payroll ADD gender CHAR(1) AFTER name;            # adding gender field
+2.    DESCRIBE employee_payroll;                                                  # show table 
+3.  update employee_payroll  set gender ='F' where name ='Tesrisa';        # show update gender name
+4.  update employee_payroll  set gender ='M' where name ='Bill' or name = 'Charlie';
+5. update employee_payroll  set salary=3000000.00 where name ='Tesrisa';   #update data salary data by name
+6.  select * from employee_payroll;
+------------------------------------------------------------------------------------------------------
+    #UC7 
+--------------------------------------------------------------------------------------------------
+1.  SELECT  AVG(salary) FROM employee_payroll WHERE gender = 'M' GROUP By gender;     #  show average salary use gender
+2.  SELECT AVG(salary) FROM employee_payroll GROUP BY gender;                         #show avg salary by group gender
+3.  SELECT gender, COUNT(name) FROM employee_payroll GROUP BY gender;             # show count salary by group by gender
+4.  SELECT gender,SUM(salary) FROM employee_payroll GROUP BY  gender;                 # show sum salary by group by gender
+5.  SELECT gender,MIN(salary) FROM employee_payroll GROUP BY  gender;                 # show   min salary by group by gender
+6.  SELECT gender,MAX(salary) FROM employee_payroll GROUP BY  gender;                  # show max salary by group by gender
